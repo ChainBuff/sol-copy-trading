@@ -1,0 +1,192 @@
+[region]
+name="FR"
+
+[redis]
+url="unix:///var/run/redis/redis.sock?db=0"
+
+[private]
+key=""
+
+[pyth]
+url="https://hermes.pyth.network"
+
+[rpc]
+url=""
+
+[grpc]
+url=""
+
+[jito]
+enable = true
+url="https://frankfurt.mainnet.block-engine.jito.wtf/api/v1"
+uuid=""
+
+
+[bloxroute]
+enable = false
+url="germany.solana.dex.blxrbdn.com"
+token=""
+
+[nextblock]
+enable = false
+url="fra.nextblock.io"
+token=""
+
+[temproal]
+enable = true
+url="http://fra2.nozomi.temporal.xyz/?c=f9b4c049-bfb1-4981-90ed-edc3aed018fb"
+
+[pump_to_raydium]
+address="39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg"
+
+[sell_tip]
+amount=1083100
+
+# 通用止盈策略
+[strategy.stop_profit]
+# tip + priority_fee + service_fee 
+# 最新价格已经包含所有费用直接出售, 且报价次数超过 20 次
+quota_num_and_transaction_fee = 50
+# 两倍手续直接出售
+transaction_fee_two = true
+# 5s价格不变, 满足 hold_profit， 进行减仓
+price_invariable_second = 5
+
+# 通用止损策略
+[strategy.stop_loss]
+# 价格不变 直接出售
+price_invariable_second = 15
+# 小于百分之25 直接出
+lt_rate = -20.0
+# 盈利百分比正数大于多少，且最新价格突然跌破-10%时，直接出售
+gt_zero_and_lt_rate = [20, -10.0]
+# 最新盈利百分比下跌超过-15%时，且报价次数过了50次，止损
+lt_rate_and_quota_num = [-15, 50]
+# 亏损权重， 假设设置为默认值，小于-10， 那么一次增加18
+loss_weight = [
+  [-3.0, 3],
+  [-5.0, 5],
+  [-10.0, 10]
+]
+# 亏损权重 次数达到止损
+loss_num = 500
+
+[strategy.pump.buy]
+# 只进入一次，失败也算，命中不购买规则也算
+is_first_buy = true
+# 大于60， 不进容易被打开盘
+amm_wsol = 60.0
+# 聪明钱包购买之前的池子， 小于1 SOL，且聪明钱包买入大于5 SOL, 不买
+pre_wsol_and_copy_buy_sol = [1.0, 5.0]
+# 聪明钱包购买之前的池子， 小于 30 SOL，且聪明钱包买入大于15 SOL, 不买
+pre_wsol_and_copy_buy_sol_1 = [30.0, 15.0]
+# 聪明钱包购买太少不买
+copy_buy_sol = 0.5
+
+[strategy.pump.sell]
+# 第一次分批后，在成本价格下方位置，售出
+first_down_cost_price = 0.05
+# 第一次分批后，下一次止盈价格
+first_next_stop_profit_price = 0.1
+# 守住利润
+hold_profit_enable = true
+# 持有盈利大于 20% 时，售出
+hold_profit = 20.0
+# 在利润大于 30% 时，每 15次价格变化，减仓按照 20% 减仓
+batch_step_num = 5
+# 减仓比例
+reduce_stock = 0.2
+
+
+[strategy.raydium.buy]
+# 只进入一次，失败也算，命中不购买规则也算
+is_first_buy = true
+# 大于60， 不进容易被打开盘， 等于 0 不开启
+amm_wsol = 300.0
+# 聪明钱包购买之前的池子， 小于1 SOL，且聪明钱包买入大于5 SOL, 不买
+pre_wsol_and_copy_buy_sol = [1.0, 30.0]
+# 聪明钱包购买之前的池子， 小于 30 SOL，且聪明钱包买入大于15 SOL, 不买
+pre_wsol_and_copy_buy_sol_1 = [30.0, 15.0]
+# 聪明钱包购买太少不买
+copy_buy_sol = 0.5
+# 不是高中gas 的钱包，池子大于 150 不买， 拉不动
+not_high_medium = 150.0
+
+[strategy.raydium.sell]
+# 第一次分批后，在成本价格下方位置，售出
+first_down_cost_price = 0.05
+# 第一次分批后，下一次止盈价格
+first_next_stop_profit_price = 0.1
+# 守住利润
+hold_profit_enable = true
+# 持有盈利大于 30% 时，售出
+hold_profit = 10.0
+# 在利润大于 30% 时，每 15次价格变化
+batch_step_num = 15
+# 减仓比例
+reduce_stock = 0.2
+
+[[wallets]]
+is_high = true
+is_medium = false
+is_low = false
+is_weight = false
+# swqos 小费
+pump_tip = 10000000
+pump_input_sol = 100000000
+pump_bps = 2500
+# swqos 小费
+raydium_tip = 10000000
+raydium_input_sol = 100000000
+raydium_bps = 2500
+# 聪明钱包
+address = "DfMxre4cKmvogbLrPigxmibVTTQDuzjdXojWzjCXXhzj"
+# 优先费用 = ((100 * 1e6) * 100001) / 1e9 = SOL 
+priority_fee = 100
+# 是否分批
+is_batch = true
+# 首次分批止盈百分比
+first_stop_profit = 20.0
+# 首次分批减仓比例
+first_reduce_stock = 0.3
+# 聪明钱包跑了， 是否跑
+is_copy_run = true
+# 分批止盈百分比
+step_stop_loss = [0.2, 0.2, 0.3, 0.4, 0.5]
+# 分批阶段中，询价超过500，售出
+step_num = 150
+# 小于 0.5 SOL 全出
+remain_sell_sol = 500000000
+
+
+[[wallets]]
+is_high = false
+is_medium = true
+is_low = false
+is_weight = false
+# swqos 小费
+pump_tip = 10000000
+pump_input_sol = 100000000
+pump_bps = 2500
+# swqos 小费
+raydium_tip = 10000000
+raydium_input_sol = 100000000
+raydium_bps = 2500
+# 聪明钱包
+address = "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK"
+# 优先费用 = ((100 * 1e6) * 100001) / 1e9 = SOL 
+priority_fee = 50
+# 是否分批
+is_batch = true
+# 首次分批止盈百分比
+first_stop_profit = 10.0
+# 首次分批减仓比例
+first_reduce_stock = 0.5
+# 聪明钱包跑了， 是否跑
+is_copy_run = true
+# 分批止盈百分比
+step_stop_loss = [0.3, 0.3, 0.4, 0.2, 0.1]
+# 分批阶段中，询价超过500，售出
+step_num = 150
+# 小于 0.5 SOL 全出
+remain_sell_sol = 500000000
