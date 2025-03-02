@@ -75,7 +75,7 @@ Feb 27 16:25:00 active-puma systemd[1]: Started redis-server.service - Advanced 
 ##### BloxRoute
 
 - 默认不启用, 可使用免费版本，跟单足够用
-- 申请地址: <https://portal.bloxroute.com/registration>, 只需要注册一个免费的账号，然后在`Acount` Tag 中， 找到 Authorization Header 内容, 填入 `token` 中即可
+- 申请地址: <https://portal.bloxroute.com/registration>, 只需要注册一个免费的账号，然后在`Account Tag` 中， 找到 Authorization Header 内容, 填入 `token` 中即可
 - 地域选择: <https://docs.bloxroute.com/solana/trader-api/introduction/regions>, 选择离你服务器最近的地址即可，保证低延迟
 
 ``` toml
