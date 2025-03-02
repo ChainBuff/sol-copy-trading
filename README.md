@@ -30,6 +30,8 @@
 #### 编辑配置文件开启 Unixsocket
 
 ``` conf
+vim /etc/redis/redis.conf
+
 # 修改 socket 文件路径, 并赋予 777 权限
 unixsocket /var/run/redis/redis.sock
 unixsocketperm 777
