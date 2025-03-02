@@ -113,6 +113,7 @@ token="xxx"
 #### 启动
 
 ``` bash
+# 默认运行环境为ubuntu 24
 # 前台运行
 ./copy-trading
 
