@@ -131,7 +131,6 @@ reduce_stock = 0.2
 is_high = true
 is_medium = false
 is_low = false
-is_weight = false
 # swqos 小费
 pump_tip = 10000000
 pump_input_sol = 100000000
@@ -154,39 +153,6 @@ first_reduce_stock = 0.3
 is_copy_run = true
 # 分批止盈百分比
 step_stop_loss = [0.2, 0.2, 0.3, 0.4, 0.5]
-# 分批阶段中，询价超过500，售出
-step_num = 150
-# 小于 0.5 SOL 全出
-remain_sell_sol = 500000000
-
-
-[[wallets]]
-is_high = false
-is_medium = true
-is_low = false
-is_weight = false
-# swqos 小费
-pump_tip = 10000000
-pump_input_sol = 100000000
-pump_bps = 2500
-# swqos 小费
-raydium_tip = 10000000
-raydium_input_sol = 100000000
-raydium_bps = 2500
-# 聪明钱包
-address = "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK"
-# 优先费用 = ((100 * 1e6) * 100001) / 1e9 = SOL 
-priority_fee = 50
-# 是否分批
-is_batch = true
-# 首次分批止盈百分比
-first_stop_profit = 10.0
-# 首次分批减仓比例
-first_reduce_stock = 0.5
-# 聪明钱包跑了， 是否跑
-is_copy_run = true
-# 分批止盈百分比
-step_stop_loss = [0.3, 0.3, 0.4, 0.2, 0.1]
 # 分批阶段中，询价超过500，售出
 step_num = 150
 # 小于 0.5 SOL 全出
