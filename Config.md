@@ -21,7 +21,7 @@ curl 45.32.232.230:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
 amount=10831000
 # 支持配置Jito、Temproal、Slot, 自己看好频率限制，由 Api 导致卖不出去的亏损自负
 type="Temporal"
-# 优先费用 = (100  * 100001) / 1e9 = 0.00100001SOL 
+# 优先费用 = 10 * 100001 / 1e9 = 0.00100001SOL 
 priority_fee = 10
 ```
 
