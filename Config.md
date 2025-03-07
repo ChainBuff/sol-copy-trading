@@ -1,11 +1,28 @@
 # 配置详解
 
+## 0Slot 新SWQOS 服务商
+
+- 三个区域任意选择, 最小小费 0.0001, 与官方达成合作, 限速为 35 TPS
+
+``` bash
+# NY
+curl 45.63.0.240:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
+# Frankfurt
+curl 57.129.76.214:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
+# AMS NL
+curl 45.32.232.230:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
+
+```
+
 ## sell_tip 卖出交易的tip
 
 ``` toml
 [sell_tip]
-# 默认 1083100 / 1e9 = 0.0010831 SOL, 提交 Temporal, 官网声明不能小于 0.001 SOL
-amount=1083100
+amount=10831000
+# 支持配置Jito、Temproal、Slot, 自己看好频率限制，由 Api 导致卖不出去的亏损自负
+type="Temporal"
+# 优先费用 = (100  * 100001) / 1e9 = 0.00100001SOL 
+priority_fee = 10
 ```
 
 ## 通用止盈止损策略
@@ -120,7 +137,8 @@ first_down_cost_price = 0.05
 # 1. 基于市场最新价格 * 百分之10 则是 下一次的止盈点
 first_next_stop_profit_price = 0.1
 
-# 守住利润，用于快速完仓位，机会于风险并存
+# 需要进入分批出货的逻辑，才会触发守住利润，用于快速完仓位，机会于风险并存
+# 与聪明钱包的 wallets.is_batch && wallets.first_stop_profit 满足后进入快速出货逻辑
 hold_profit_enable = true
 
 # 盈利百分比大于 20% 时, 看 batch_step_num 次数是否达标, batch_step_num 根据每次价格变化更新
@@ -199,12 +217,25 @@ is_high = true
 is_medium = false
 # 波动小
 is_low = false
+# 可选,跟买跟卖, 默认不开启
+# 位置1: 不开启分批售卖, 覆盖 is_batch 的值
+# 位置2: 不开启常规止盈止损
+is_copy_buy_sell = [false, false]
+# 可选配置, 设置为 true 此钱包不进入内盘
+is_not_enter_pump = false
+# 可选配置, 针对钱包 SOL 池子大于不进入, 会覆盖内盘通用 strategy.pump.buy.amm_sol 配置
+pump_amm_sol = 10
+# 内盘守住利润玩法, 会覆盖 strategy.pupm.sell.hold_profit_enable
+# 按照顺序 0: hold_profit_enable, 1: hold_profit, 2: batch_step_num, 3: reduce_stock
+pump_wallet_hold_profit = [true, 20.0, 10, 0.2]
 # 内盘 swqos 小费
 pump_tip = 10000000
 # 跟单此聪明钱包内盘, 购入的金额 SOL, 单位需要除以 1E9;
 pump_input_sol = 100000000
 # 滑点, 内盘滑点影响的输入金额, 所以尽量别设置太高. 设置太高容易抬轿子.
 pump_bps = 2500
+# 可选配置, 设置为 true 此钱包不进入外盘
+is_not_enter_raydium = false
 # 外盘 swqos 小费
 raydium_tip = 10000000
 # 跟单此聪明钱包内盘, 购入的金额 SOL, 单位需要除以 1E9;
@@ -213,7 +244,7 @@ raydium_input_sol = 100000000
 raydium_bps = 2500
 # 聪明钱包
 address = "DfMxre4cKmvogbLrPigxmibVTTQDuzjdXojWzjCXXhzj"
-# 优先费用 = ((100 * 1e6) * 100001) / 1e9 = SOL 
+# 优先费用 = 100 * 100001 / 1e9 = 0.01 SOL 
 priority_fee = 100
 # 是否分批
 # 此值等于 false, 则直走通用的止盈止损
