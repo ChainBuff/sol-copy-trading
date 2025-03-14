@@ -1,0 +1,123 @@
+[redis]
+url="unix:///var/run/redis/redis.sock?db=0"
+
+[private]
+key=""
+
+[pyth]
+url="https://hermes.pyth.network"
+
+[rpc]
+url=""
+
+[grpc]
+url=""
+
+[jito]
+enable = true
+url="https://frankfurt.mainnet.block-engine.jito.wtf/api/v1"
+uuid=""
+
+[bloxroute]
+enable = false
+url="germany.solana.dex.blxrbdn.com"
+token=""
+
+[nextblock]
+enable = false
+url="fra.nextblock.io"
+token=""
+
+[temproal]
+enable = true
+url="http://fra2.nozomi.temporal.xyz/?c=f9b4c049-bfb1-4981-90ed-edc3aed018fb"
+
+[slot]
+enable = false
+url="http://57.129.76.214:8897?api-key=b95e829cdee2460caedd75b47d2deb5d"
+
+[pump_to_raydium]
+address="39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg"
+
+[sell_tip]
+amount=1800000
+type="Slot"
+priority_fee = 10
+
+[delay_slot]
+slot=2
+
+[strategy.stop_profit]
+quota_num_and_transaction_fee = 50
+transaction_fee_two = true
+price_invariable_second = 5
+
+# 通用止损策略
+[strategy.stop_loss]
+price_invariable_second = 15
+lt_rate = -20.0
+gt_zero_and_lt_rate = [20, -10.0]
+lt_rate_and_quota_num = [-15, 50]
+loss_weight = [
+  [-3.0, 3],
+  [-5.0, 5],
+  [-10.0, 10]
+]
+loss_num = 500
+
+[strategy.pump.buy]
+is_first_buy = true
+amm_wsol = 60.0
+pre_wsol_and_copy_buy_sol = [1.0, 5.0]
+pre_wsol_and_copy_buy_sol_1 = [30.0, 15.0]
+copy_buy_sol = 0.5
+
+[strategy.pump.sell]
+first_down_cost_price = 0.05
+first_next_stop_profit_price = 0.1
+hold_profit_enable = true
+hold_profit = 20.0
+batch_step_num = 5
+reduce_stock = 0.2
+prevent_pvp = [true, 5, 86400]
+
+
+[strategy.raydium.buy]
+is_first_buy = true
+amm_wsol = 300.0
+pre_wsol_and_copy_buy_sol = [1.0, 30.0]
+pre_wsol_and_copy_buy_sol_1 = [30.0, 15.0]
+copy_buy_sol = 0.5
+not_high_medium = 150.0
+
+[strategy.raydium.sell]
+first_down_cost_price = 0.05
+first_next_stop_profit_price = 0.1
+hold_profit_enable = true
+hold_profit = 10.0
+batch_step_num = 15
+# 减仓比例
+reduce_stock = 0.2
+
+[[wallets]]
+is_high = true
+is_medium = false
+is_low = false
+is_not_enter_pump = false
+pump_amm_sol = 10
+pump_tip = 10000000
+pump_input_sol = 100000000
+pump_bps = 2500
+is_not_enter_raydium = false
+raydium_tip = 10000000
+raydium_input_sol = 100000000
+raydium_bps = 2500
+address = "DfMxre4cKmvogbLrPigxmibVTTQDuzjdXojWzjCXXhzj"
+priority_fee = 100
+is_batch = true
+first_stop_profit = 20.0
+first_reduce_stock = 0.3
+is_copy_run = true
+step_stop_loss = [0.2, 0.2, 0.3, 0.4, 0.5]
+step_num = 150
+remain_sell_sol = 500000000
