@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  redis:
+    user: root
+    image: redis:latest
+    container_name: copy-redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/socket:/var/run/redis
+      - ./redis/data:/var/lib/redis
+      - ./redis/logs:/var/log/redis
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: copy-trading
+    volumes:
+      - ./run:/app  # 挂载二进制文件目录
+      - ./redis/socket:/var/run/redis  # 共享 Redis 的 Unix Socket [[3]]
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

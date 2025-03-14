@@ -1,0 +1,18 @@
+16:C 14 Mar 2025 09:33:07.762 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+16:C 14 Mar 2025 09:33:07.762 * Redis version=7.2.5, bits=64, commit=00000000, modified=0, pid=16, just started
+16:C 14 Mar 2025 09:33:07.762 * Configuration loaded
+1:C 14 Mar 2025 09:36:41.599 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 14 Mar 2025 09:36:41.599 * Redis version=7.2.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 14 Mar 2025 09:36:41.599 * Configuration loaded
+1:M 14 Mar 2025 09:36:41.600 * monotonic clock: POSIX clock_gettime
+1:M 14 Mar 2025 09:36:41.600 # Failed to write PID file: Permission denied
+1:M 14 Mar 2025 09:36:41.600 * Running mode=standalone, port=6379.
+1:M 14 Mar 2025 09:36:41.601 # Failed opening Unix socket: bind: Permission denied
+1:C 14 Mar 2025 09:39:33.979 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 14 Mar 2025 09:39:33.979 * Redis version=7.2.5, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 14 Mar 2025 09:39:33.979 * Configuration loaded
+1:M 14 Mar 2025 09:39:33.979 * monotonic clock: POSIX clock_gettime
+1:M 14 Mar 2025 09:39:33.979 * Running mode=standalone, port=6379.
+1:M 14 Mar 2025 09:39:33.980 * Server initialized
+1:M 14 Mar 2025 09:39:33.980 * Ready to accept connections tcp
+1:M 14 Mar 2025 09:39:33.980 * Ready to accept connections unix

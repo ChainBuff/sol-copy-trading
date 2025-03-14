@@ -11,18 +11,26 @@ curl 45.63.0.240:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
 curl 57.129.76.214:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
 # AMS NL
 curl 45.32.232.230:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
-
 ```
 
 ## sell_tip 卖出交易的tip
 
 ``` toml
 [sell_tip]
-amount=10831000
+# 0.0018 SOL
+amount=1800000
 # 支持配置Jito、Temproal、Slot, 自己看好频率限制，由 Api 导致卖不出去的亏损自负
-type="Temporal"
-# 优先费用 = 10 * 100001 / 1e9 = 0.00100001SOL 
+type="Slot"
+# 优先费用 = (10 * 100001) / 1e9 = 0.00100001SOL 
 priority_fee = 10
+```
+
+## delay_slot 延迟区块不购买
+
+``` toml
+[delay_slot]
+# 基于购买者的交易slot +2 计算, 此交易自动失败. 最大不超过10
+slot=2
 ```
 
 ## 通用止盈止损策略
@@ -50,6 +58,8 @@ transaction_fee_two = true
 # 不满足，则无事发生
 # 如果不想启用此参数, 可直接注释
 price_invariable_second = 5
+# 可选参数, 当最新涨幅大于等于设置值, 则直接清仓
+gte_rate=10
 ```
 
 ### 止损策略
@@ -147,6 +157,11 @@ hold_profit = 20.0
 batch_step_num = 5
 # 减仓比例
 reduce_stock = 0.2
+# 可选, 防止聪明钱包割跟单
+# 位置1: 启动
+# 位置2: 进场之后5个消息数, 跟单钱包卖出, 则条件成立
+# 位置3: 锁定钱包一天, 单位秒 
+prevent_pvp = [true, 5, 86400]
 ```
 
 ## 外盘策略
@@ -223,7 +238,7 @@ is_low = false
 is_copy_buy_sell = [false, false]
 # 可选配置, 设置为 true 此钱包不进入内盘
 is_not_enter_pump = false
-# 可选配置, 针对钱包 SOL 池子大于不进入, 会覆盖内盘通用 strategy.pump.buy.amm_sol 配置
+# 可选配置, 针对SOL池子大于设置值不进入, 会覆盖内盘通用 strategy.pump.buy.amm_sol 配置
 pump_amm_sol = 10
 # 内盘守住利润玩法, 会覆盖 strategy.pupm.sell.hold_profit_enable
 # 按照顺序 0: hold_profit_enable, 1: hold_profit, 2: batch_step_num, 3: reduce_stock

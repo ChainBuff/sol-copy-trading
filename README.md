@@ -45,6 +45,8 @@ unixsocketperm 777
 2. sudo service redis-server status
 # 查看 sock 文件是否存在
 3. ls /var/run/redis/redis.sock
+# 如果不存在, 需要重启 redis
+4. sudo service redis-server restart
 
 # active = running 则代表成功
 ● redis-server.service - Advanced key-value store
