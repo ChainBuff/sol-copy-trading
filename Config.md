@@ -6,11 +6,12 @@
 
 ``` bash
 # NY
-curl 45.63.0.240:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
+curl http://ny1.0slot.trade/?api-key=b95e829cdee2460caedd75b47d2deb5d
 # Frankfurt
-curl 57.129.76.214:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
+curl http://de1.0slot.trade/?api-key=b95e829cdee2460caedd75b47d2deb5d
 # AMS NL
-curl 45.32.232.230:8897?api-key=b95e829cdee2460caedd75b47d2deb5d
+curl http://ams1.0slot.trade/?api-key=b95e829cdee2460caedd75b47d2deb5d
+
 ```
 
 ## sell_tip 卖出交易的tip
